@@ -19,12 +19,14 @@
 <table class="table">
   <tr>
     <th>ID</th>
+    <th>Thumbnail</th>
     <th>Post</th>
     <th>Actions</th>
   </tr>
 
   <tr *ngFor="let post of posts">
     <td width="5%">{{ post.ID }}</td>
+    <td><img [src]="'http://localhost:4400/' + post.thumbnail" class="thumbnail"></td>
     <td>{{ post.post }}</td>
     <td width="15%">
       <button (click)="editPost(post.ID)" class="btn btn-primary" >Edit</button> &nbsp; &nbsp;

@@ -19,9 +19,10 @@ export class CommonService {
     return this.http.get<GetPosts>(this.url);
   }
 
-  newPost(newpost:string){
+  newPost(newpost:string, imgname:string){
     let newPostObj = {
-      newpost: newpost
+      newpost: newpost,
+      thumbnail: imgname
     }
     return this.http.post<NewPost>(this.url, newPostObj);
   }

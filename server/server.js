@@ -39,10 +39,12 @@ var corsOptions = {
     }
 server.use(cors(corsOptions));
 server.use(express.json());
+server.use(express.static('uploads'));
 
 //File upload API
 server.post('/upload', fileupload.single("image") , (req, res) => {
     console.log(req.file);
+    res.json("upload success");
 })
 
 
@@ -60,8 +62,8 @@ server.get('/posts', (req,res) => {
 });
 
 server.post('/posts', (req, res) => {
-    let query = "CALL `NewPost`(?)";
-    db.query( query, req.body.newpost, (error, newpostfromSQL) => {
+    let query = "CALL `NewPost`(?, ?)";
+    db.query( query, [req.body.newpost, req.body.thumbnail], (error, newpostfromSQL) => {
         if(error){
             res.json({ newpost: false, message: error });
         }

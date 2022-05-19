@@ -1,10 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Post } from '../interfaces/interfaces';
 import { CommonService } from '../services/common.service';
-
-interface Post{
-  ID: number;
-  post:string;
-}
 
 @Component({
   selector: 'app-home',
@@ -16,12 +12,14 @@ export class HomeComponent implements OnInit {
   posts:Post[] = [];
 
   imageFormData:any;
+  imgname:string = '';
 
   constructor(private cs:CommonService) { }
 
   onChange(event:any){
     let file:File = event.target.files[0];
-    console.log(file);
+    this.imgname = file.name;
+    console.log(file.name);
     const formData = new FormData();
 
     formData.append('image', file);
@@ -43,9 +41,15 @@ export class HomeComponent implements OnInit {
   }
 
   addNewPost(){
-    this.cs.newPost(this.newpost).subscribe( insertedPost => {
+    this.cs.newPost(this.newpost, this.imgname).subscribe( insertedPost => {
       console.log(insertedPost.newpost[0]);
-      this.posts.push(insertedPost.newpost[0]);
+      let newPost =  insertedPost.newpost[0];
+      this.cs.uploadFile(this.imageFormData).subscribe(response => {
+        console.log('image upload done');
+        this.posts.push(newPost);
+        console.log('content pushed');
+      })
+      // this.posts.push(insertedPost.newpost[0]);
 
     })
   }

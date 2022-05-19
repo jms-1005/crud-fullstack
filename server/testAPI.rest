@@ -7,7 +7,8 @@ POST {{url}}/posts
 Content-Type: application/json
 
 {
-    "newpost": "Testing from TEST API"
+    "newpost": "Testing from TEST API",
+    "thumbnail": "image1.png"
 }
 
 ###
