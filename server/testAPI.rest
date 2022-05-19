@@ -12,4 +12,15 @@ Content-Type: application/json
 
 ###
 
-DELETE {{url}}/posts/14
+DELETE {{url}}/posts/24
+
+###
+POST {{url}}/upload
+Content-Type: multipart/form-data; boundary=imageboundary
+
+--imageboundary
+Content-Disposition: form-data; name="image"; filename="image1.jpg"
+Content-Type: image/png
+
+< ./image1.png
+--imageboundary--

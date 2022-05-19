@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import mysql from 'mysql';
+import multer from 'multer';
 
 const db = mysql.createConnection({
     host: 'localhost',
@@ -19,6 +20,17 @@ db.connect(error => {
     }
 });
 
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, './uploads')
+    },
+    filename: function (req, file, cb) {
+      cb(null, file.originalname)
+    }
+  })
+
+const fileupload = multer({ storage: storage });
+
 
 const server = express();
 var corsOptions = {
@@ -27,6 +39,12 @@ var corsOptions = {
     }
 server.use(cors(corsOptions));
 server.use(express.json());
+
+//File upload API
+server.post('/upload', fileupload.single("image") , (req, res) => {
+    console.log(req.file);
+})
+
 
 //GET ALL POSTS
 server.get('/posts', (req,res) => {

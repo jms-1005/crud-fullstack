@@ -30,7 +30,9 @@ export class HomeComponent implements OnInit {
   }
 
   uploadImage(){
-
+    this.cs.uploadFile(this.imageFormData).subscribe( response => {
+      console.log(response);
+    })
   }
 
   getPosts(){
