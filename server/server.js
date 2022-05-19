@@ -48,9 +48,27 @@ server.post('/posts', (req, res) => {
             res.json({ newpost: false, message: error });
         }
         else{
-            res.json({ newpost: newpostfromSQL, message: "new post inserted"});
+            res.json({ newpost: newpostfromSQL[0], message: "new post inserted"});
         }
     } )
+});
+
+server.delete('/posts/:id', (req, res) => {
+    let query = 'CALL `DeletePost`(?)';
+    db.query( query, [req.params.id], (error, deleteSuccess) => {
+        if(error){
+            res.json({ deleteSuccess: false, message: error });
+        }
+        else{
+            if(deleteSuccess[0][0].DEL_SUCCESS == 0){
+                res.json({ deleteSuccess: deleteSuccess[0][0].DEL_SUCCESS, message: "ID not found"});
+            }
+            else{
+                res.json({ deleteSuccess: deleteSuccess[0][0].DEL_SUCCESS, message: "Successfully deleted"});
+            }
+            
+        }
+    })
 })
 
 

@@ -9,3 +9,7 @@ Content-Type: application/json
 {
     "newpost": "Testing from TEST API"
 }
+
+###
+
+DELETE {{url}}/posts/14

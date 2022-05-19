@@ -1,10 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { DeletePost, GetPosts, NewPost } from '../interfaces/interfaces';
 
-interface Post{
-  ID: number;
-  post:string;
-}
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +12,18 @@ export class CommonService {
   constructor(private http:HttpClient) { }
 
   getPosts(){
-    return this.http.get<{ data:Post[], message:any }>(this.url);
+    return this.http.get<GetPosts>(this.url);
+  }
+
+  newPost(newpost:string){
+    let newPostObj = {
+      newpost: newpost
+    }
+    return this.http.post<NewPost>(this.url, newPostObj);
+  }
+
+  deletePost(id:number){
+    return this.http.delete<DeletePost>(this.url + "/" + id);
   }
 
 

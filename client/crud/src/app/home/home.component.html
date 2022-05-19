@@ -1,17 +1,46 @@
 
 <div class="container">
   <div class="form-floating mt-5">
-  <textarea class="form-control postText" placeholder="Leave a comment here" id="floatingTextarea" rows="10"></textarea>
+  <textarea [(ngModel)]="newpost" class="form-control postText" placeholder="Leave a comment here" id="floatingTextarea" rows="10"></textarea>
   <label for="floatingTextarea">Post something here...</label>
   </div>
+
+
+  <div class="input-group mb-3">
+    <input type="file" class="form-control" id="inputGroupFile02" (change)="onChange($event)" name="image" >
+    <label class="input-group-text" for="inputGroupFile02" (click)="uploadImage()">Upload</label>
+  </div>
+
   <div class="mt-3">
-  <button class="btn btn-primary">POST</button> | <button class="btn btn-primary" (click)="getPosts()">GET</button>
+  <button class="btn btn-primary" (click)="addNewPost()">POST</button>
+</div>
+
+<div class="table-responsive mt-5">
+<table class="table">
+  <tr>
+    <th>ID</th>
+    <th>Post</th>
+    <th>Actions</th>
+  </tr>
+
+  <tr *ngFor="let post of posts">
+    <td width="5%">{{ post.ID }}</td>
+    <td>{{ post.post }}</td>
+    <td width="15%">
+      <button (click)="editPost(post.ID)" class="btn btn-primary" >Edit</button> &nbsp; &nbsp;
+      <button class="btn btn-primary" (click)="deletePost(post.ID)">Delete</button>
+    </td>
+  </tr>
+
+</table>
 </div>
 
 
-  <div *ngFor="let post of posts">
-    {{post.ID}} - {{ post.post }} <button (click)="editPost(post.ID)" class="btn btn-primary" >Edit</button> <button class="btn btn-secondary" (click)="deletePost(post.ID)">Delete</button>
-  </div>
+  <!-- <div *ngFor="let post of posts">
+    {{post.ID}} - {{ post.post }}
+    <button (click)="editPost(post.ID)" class="btn btn-primary" >Edit</button>
+    <button class="btn btn-secondary" (click)="deletePost(post.ID)">Delete</button>
+  </div> -->
 
 </div>
 
