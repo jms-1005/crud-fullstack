@@ -12,6 +12,7 @@ export class HomeComponent implements OnInit {
   newpost:string = '';
   posts:Post[] = [];
   name = environment.name;
+  host = environment.host;
 
   imageFormData:any;
   imgname:string = '';
