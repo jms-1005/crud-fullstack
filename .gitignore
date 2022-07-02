@@ -1,6 +1,6 @@
 client/crud/node_modules
 client/crud/.env
-client/crud/dist
+#client/crud/dist
 
 server/node_modules
 
