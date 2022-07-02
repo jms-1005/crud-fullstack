@@ -1,22 +1,31 @@
 import express from 'express';
 import cors from 'cors';
-import mysql from 'mysql';
+import mysql from 'mysql2';
 import multer from 'multer';
+import 'dotenv/config';
+
+// const db = mysql.createConnection({
+//     host: 'localhost',
+//     port: 8889,
+//     user: 'root',
+//     password: 'root',
+//     database: 'crud'
+// });
 
 const db = mysql.createConnection({
-    host: 'localhost',
-    port: 8889,
-    user: 'root',
-    password: 'root',
-    database: 'crud'
+    host: process.env.DBHOST,
+    port: process.env.DBPORT,
+    user: process.env.DBUSER,
+    password: process.env.DBPASSWORD,
+    database: process.env.DBDATABASE
 });
 
 db.connect(error => {
     if(error){
-        console.log("DB Connection error");
+        console.log("DB Connection error", error);
     }
     else{
-        console.log("MySQL connected");
+        console.log("MySQL connected", process.env.DBDATABASE);
     }
 });
 

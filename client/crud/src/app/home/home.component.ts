@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Post } from '../interfaces/interfaces';
 import { CommonService } from '../services/common.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-home',
@@ -10,6 +11,7 @@ import { CommonService } from '../services/common.service';
 export class HomeComponent implements OnInit {
   newpost:string = '';
   posts:Post[] = [];
+  name = environment.name;
 
   imageFormData:any;
   imgname:string = '';

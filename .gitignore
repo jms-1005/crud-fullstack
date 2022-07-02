@@ -3,3 +3,5 @@ client/crud/.env
 client/crud/dist
 
 server/node_modules
+
+server/.env
