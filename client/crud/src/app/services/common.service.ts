@@ -1,18 +1,20 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { DeletePost, GetPosts, NewPost } from '../interfaces/interfaces';
+import { environment } from 'src/environments/environment';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class CommonService {
-  private url = 'http://localhost:4400/posts';
+  host = environment.host;
+  private url = this.host + '/posts';
 
   constructor(private http:HttpClient) { }
 
   uploadFile(filedata:any){
-    return this.http.post('http://localhost:4400/upload', filedata);
+    return this.http.post(this.host + '/upload', filedata);
   }
 
   getPosts(){

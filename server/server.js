@@ -46,7 +46,8 @@ var corsOptions = {
     origin: ["http://localhost:4200"],
     optionsSuccessStatus: 200 // For legacy browser support
     }
-server.use(cors(corsOptions));
+// server.use(cors(corsOptions));
+server.use(cors());
 server.use(express.json());
 server.use(express.static('uploads'));
 

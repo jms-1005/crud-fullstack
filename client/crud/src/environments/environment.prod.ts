@@ -1,4 +1,5 @@
 export const environment = {
   production: true,
-  name: "Produ"
+  name: "Produ",
+  host: "https://coral-app-vgtfq.ondigitalocean.app"
 };
